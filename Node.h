@@ -7,6 +7,7 @@ private:
 public:
     Node();
     Node(int size, int cost, Node *prev, Node *next);
+    Node(int size);
     Node(Node *node);
     ~Node();
     int *getData();

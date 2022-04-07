@@ -10,8 +10,7 @@ Container::Container(/* args */)
     this->count = 0;
 }
 
-void Container::add(Node *node)
-{
+void Container::add(Node *node){
     if(this->head == NULL){
         this->head = node;
     }else{
@@ -23,17 +22,25 @@ void Container::add(Node *node)
     this->count++;
 }
 
-Node* Container::pull(Node *node)
+Node* Container::pull()
 {
     if( count == 0){
         return NULL;
-    }else {
+    }
+    else if (count == 1){
+        Node * temp = this->head;
+        this->head = NULL;
+        this->count--;
+        return temp;
+    }
+    else if(count > 1){
         Node * temp = this->head;
         temp = temp->getNext();
         this->head = temp;
         this->count--;
         temp->setPrev(NULL);
         return temp;
+        this->count--;
     }
 }
 

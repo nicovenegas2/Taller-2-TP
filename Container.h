@@ -9,7 +9,7 @@ public:
     Container(/* args */);
     ~Container();
     void add(Node *node);
-    Node* pull(Node *node);
+    Node* pull();
     void clear();
     void swap(Container *container);
     Node *getHead();

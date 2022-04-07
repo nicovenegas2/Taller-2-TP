@@ -1,4 +1,4 @@
-test: test_container.cpp test_node.cpp
+test: test_container.cpp test_node.cpp Container.o Node.o
 	g++ Node.o Container.o test_container.cpp -o test_container
 	g++ Node.o test_node.cpp -o test_node
 

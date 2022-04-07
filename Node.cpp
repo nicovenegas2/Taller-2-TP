@@ -29,6 +29,14 @@ Node::Node(Node *node){
     }
 }
 
+Node::Node(int size){
+    this->array = new int[size];
+    this->size = size;
+    this->cost = 0;
+    this->prev = NULL;
+    this->next = NULL;
+}
+
 int *Node::getData(){
     return this->array;
 }
