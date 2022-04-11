@@ -16,5 +16,7 @@ public:
     ~CpuAssign();
     void generateTimes();
     void solve();
-    int getCuote(int start);
+    int getCuote(Node* node,int start);
+    int getMinArray(Node *node, int row);
+    void print();
 };

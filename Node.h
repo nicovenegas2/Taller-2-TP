@@ -17,7 +17,10 @@ public:
     void setNext(Node *next);
     Node *getPrev();
     Node *getNext();
-
+    void clear();
+    void markAvailable(int index);
+    int getAvailablePointer();
+    int *getAvailables();
 
 private:
     int *array;
@@ -25,6 +28,8 @@ private:
     Node *prev;
     Node *next;
     int size;
+    int *availables;
+    int availablePointer;
 
 
 };
