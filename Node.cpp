@@ -42,11 +42,14 @@ Node::Node(Node *node){
 
 Node::Node(int size){
     this->array = new int[size];
+    this->availablePointer = 0;
+    this->availables = new int[size];
     this->size = size;
     this->cost = 0;
     this->prev = NULL;
     this->next = NULL;
     this->clear();
+    // cout << "size: " << size << endl;
 }
 
 int *Node::getData(){
@@ -84,10 +87,7 @@ void Node::clear(){
     this->availablePointer = 0;
     for(int i = 0; i < this->size; i++){
         this->array[i] = -1;
-    }
-    for (int j = 0; j < this->size; j++)
-    {
-        this->availables[j] = j;
+        this->availables[i] = i;
     }
 }
 
@@ -109,4 +109,28 @@ int Node::getAvailablePointer(){
 
 int *Node::getAvailables(){
     return this->availables;
+}
+
+void Node::printData(){
+    for(int i = 0; i < this->size; i++){
+        cout << this->array[i] << " ";
+    }
+    cout << endl;
+}
+
+void Node::changeData(int data, int index){
+    this->array[index] = data;
+}
+
+void Node::printAvailable(){
+    for(int i = 0; i < this->size; i++){
+        if(this->availablePointer == i){
+            cout << "|" << this->availables[i] << "| ";
+        }else {
+            cout << this->availables[i] << " ";
+        }
+        
+    }
+    cout << "Pointer: " << this->availablePointer << endl;
+    cout << endl;
 }

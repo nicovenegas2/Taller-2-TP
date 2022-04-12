@@ -14,6 +14,7 @@ public:
     void swap(Container *container);
     Node *getHead();
     void print();
+    bool isEmpty();
 
 private:
     Node *head;

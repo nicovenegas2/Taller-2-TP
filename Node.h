@@ -21,6 +21,9 @@ public:
     void markAvailable(int index);
     int getAvailablePointer();
     int *getAvailables();
+    void printData();
+    void changeData(int data, int index);
+    void printAvailable();
 
 private:
     int *array;

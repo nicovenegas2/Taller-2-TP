@@ -76,6 +76,10 @@ void Container::print(){
 }
 
 
+bool Container::isEmpty(){
+    return this->count == 0;
+}
+
 
 
 

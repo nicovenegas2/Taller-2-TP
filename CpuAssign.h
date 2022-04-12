@@ -19,4 +19,5 @@ public:
     int getCuote(Node* node,int start);
     int getMinArray(Node *node, int row);
     void print();
+    void visit(Node *node);
 };
