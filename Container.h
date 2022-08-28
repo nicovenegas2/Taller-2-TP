@@ -2,8 +2,9 @@
 
 class Container
 {
-private:
-    /* data */
+    /*
+    Estructura de datos que representa un contenedor de nodos
+    */
 
 public:
     Container(/* args */);
@@ -15,6 +16,7 @@ public:
     Node *getHead();
     void print();
     bool isEmpty();
+    void markWaitNodes();
 
 private:
     Node *head;

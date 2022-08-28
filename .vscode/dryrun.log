@@ -1,0 +1,11 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory '/home/nico/Desktop/code/repos/Taller-2-TP'
+g++ -c -o Node.o Node.cpp
+g++ -c Container.cpp -o Container.o
+g++    -c -o CpuAssign.o CpuAssign.cpp
+g++ Node.o Container.o test_container.cpp -o test_container
+g++ Node.o test_node.cpp -o test_node
+g++ Node.o Container.o  CpuAssign.o test_cpuAssign.cpp -o test_cpuAssign
+g++ Node.o Container.o  CpuAssign.o main.cpp -o main
+make: Leaving directory '/home/nico/Desktop/code/repos/Taller-2-TP'
+ 

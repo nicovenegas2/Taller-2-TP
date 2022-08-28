@@ -4,13 +4,13 @@ using namespace std;
 
 
 
-Container::Container(/* args */)
+Container::Container() // Constructor
 {
     this->head = NULL;
     this->count = 0;
 }
 
-void Container::add(Node *node){
+void Container::add(Node *node){ // Agrega un nodo al inicio del contenedor
     if(this->head == NULL){
         this->head = node;
     }else{
@@ -22,7 +22,7 @@ void Container::add(Node *node){
     this->count++;
 }
 
-Node* Container::pull()
+Node* Container::pull() // Extrae el primer nodo del contenedor
 {
     if( count == 0){
         return NULL;
@@ -44,25 +44,29 @@ Node* Container::pull()
     }
 }
 
-Node *Container::getHead()
+Node *Container::getHead() // Obtiene el primer nodo del contenedor
 {
     return this->head;
 }
 
-void Container::clear()
+void Container::clear() // Limpia el contenedor
 {
     this->head = NULL;
     this->count = 0;
 }
 
-void Container::swap(Container *container)
+void Container::swap(Container *container) // Intercambia los contenedores
 {
     Node *temp = this->head;
+    int tempCount = this->count;
     this->head = container->head;
     container->head = temp;
+    tempCount = container->count;
+    container->count = this->count;
+    this->count = tempCount;
 }
 
-void Container::print(){
+void Container::print(){ // Imprime los costos de los nodos del contenedor
     if (this->head == NULL){
         cout << "Container is empty" << endl;
     }else {
@@ -76,10 +80,19 @@ void Container::print(){
 }
 
 
-bool Container::isEmpty(){
+bool Container::isEmpty(){ // Verifica si el contenedor esta vacio
     return this->count == 0;
 }
 
-
+void Container::markWaitNodes(){ // Marca los nodos que estan esperando
+    if (this->head == NULL){
+        return;
+    }
+    Node *temp = this->head;
+    while(temp != NULL){
+        temp->markWait();
+        temp = temp->getNext();
+    }
+}
 
 

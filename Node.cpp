@@ -1,9 +1,11 @@
 #include "Node.h"
 #include <iostream>
+#include "string.h"
 using namespace std;
 
 Node::Node(){
     this->array = NULL;
+    this->toMark = -1;
     this->cost = 0;
     this->prev = NULL;
     this->next = NULL;
@@ -15,6 +17,7 @@ Node::Node(){
 
 Node::Node(int size, int cost, Node *prev, Node *next){
     this->array = new int[size];
+    this->toMark = -1;
     this->availablePointer = 0;
     this->availables = new int[size];
     this->cost = cost;
@@ -26,18 +29,29 @@ Node::Node(int size, int cost, Node *prev, Node *next){
 
 Node::Node(Node *node){
     this->array = new int[node->size];
+    this->toMark = -1;
     this->cost = node->cost;
-    this->prev = node->prev;
+    // this->prev = node->prev;
     this->size = node->size;
-    this->next = node->next;
+    // this->next = node->next;
     this->availablePointer = node->availablePointer;
     this->availables = new int[node->size];
-    for(int i = 0; i < this->size; i++){
-        this->array[i] = node->array[i];
-    }
-    for(int i = 0; i < this->size; i++){
-        this->availables[i] = node->availables[i];
-    }
+    memcpy(this->array, node->array, node->size * sizeof(int));
+    memcpy(this->availables, node->availables, node->size * sizeof(int));
+}
+
+Node::Node(Node *node, int toMark){
+    this->array = new int[node->size];
+    this->toMark = -1;
+    this->cost = node->cost;
+    // this->prev = node->prev;
+    this->size = node->size;
+    // this->next = node->next;
+    this->availablePointer = node->availablePointer;
+    this->availables = new int[node->size];
+    this->toMark = toMark;
+    this->array = node->array;
+    this->availables = node->availables;
 }
 
 Node::Node(int size){
@@ -82,6 +96,7 @@ Node *Node::getNext(){
 
 void Node::clear(){
     this->cost = 0;
+    this->toMark = -1;
     this->prev = NULL;
     this->next = NULL;
     this->availablePointer = 0;
@@ -96,6 +111,8 @@ void Node::markAvailable(int index){
         cout << "Error: availablePointer is out of bound" << endl;
         return;
     }else{
+        int pointer = this->availablePointer;
+        this->array[pointer] = this->availables[index];
         int temp = this->availables[index];
         this->availables[index] = this->availables[this->availablePointer];
         this->availables[this->availablePointer] = temp;
@@ -133,4 +150,23 @@ void Node::printAvailable(){
     }
     cout << "Pointer: " << this->availablePointer << endl;
     cout << endl;
+}
+
+void Node::unmarkAvailable(){
+    this->array[this->availablePointer] = -1;
+    this->availablePointer--;
+}
+
+void Node::markWait(){
+    if(this->toMark != -1){
+        int *arrayTemp = new int[this->size];
+        int *availablesTemp = new int[this->size];
+        memcpy(arrayTemp, this->array, this->size * sizeof(int));
+        this->array = arrayTemp;
+        
+        memcpy(availablesTemp, this->availables, this->size * sizeof(int));
+        this->availables = availablesTemp;
+        this->markAvailable(this->toMark);
+        this->toMark = -1;
+    }
 }

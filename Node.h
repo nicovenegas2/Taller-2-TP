@@ -3,12 +3,15 @@
 class Node
 {
 private:
-    /* data */
+    /* estructura que contiene una lista de solucion, un costo y una lista de posibles soluciones 
+    Tambien permita el enlace de nodos de manera bidireccional
+    */
 public:
     Node();
     Node(int size, int cost, Node *prev, Node *next);
     Node(int size);
     Node(Node *node);
+    Node(Node *node, int toMark);
     ~Node();
     int *getData();
     int getCost();
@@ -24,6 +27,8 @@ public:
     void printData();
     void changeData(int data, int index);
     void printAvailable();
+    void unmarkAvailable();
+    void markWait();
 
 private:
     int *array;
@@ -33,6 +38,7 @@ private:
     int size;
     int *availables;
     int availablePointer;
+    int toMark;
 
 
 };
